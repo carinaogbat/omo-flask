@@ -18,8 +18,54 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return """<!doctype html>
+    <html>Hi! This is the home page.
+    You can enter the site and get compliments <a href="http://localhost:5000/hello"> here. </a>
+    <div>
+    Or if you're feeling moody you can find insults 
+    <a href="http://localhost:5000/diss"> here. </a>
+    </div>
+    </html>"""
 
+
+@app.route('/diss')
+def insult():
+  """Insults user and prompts for name"""
+
+  return """<!doctype html> 
+  <html>
+  Wow you are really ugly! What is your name?
+  <div>
+  <form action="/insult">
+  <input type="text" name="person">
+  <label Input Name>
+  <div>
+  <label for="insult"> What insult would you like to choose? </label>
+    <select name="insult" id="selected_insult">
+    <option value="dumb"> Dumb </option>
+    <option value="out_of_shape"> Out of shape </option>
+    <option value="funny_looking"> Funny looking </option>
+    </select>
+  </div>
+  <input type="Submit" value="Submit">
+  </form>
+  </div>
+   </html>"""
+
+@app.route('/insult')
+def create_insult():
+    """Insults user by name"""
+    user = request.args.get("person")
+    insult = request.args.get("insult")
+
+    return """<!doctype html>
+  <html>
+  <h1>An Insult:</h1>
+  <body>
+  Wow {user} not only are you ugly, you are {insult}!
+  </body>
+  </html>
+  """
 
 @app.route('/hello')
 def say_hello():
@@ -35,7 +81,19 @@ def say_hello():
         <h1>Hi There!</h1>
         <form action="/greet">
           What's your name? <input type="text" name="person">
+        <div>
+        <div>
+          Pick a compliment below:
+        </div>
+          <input type="radio" name="compliment" value="amazing" id="amazing">
+          <label for="amazing">Amazing</label>
+          <input type="radio" name="compliment" value="great" id="great>
+          <label for="Great">Great</label>
+          <input type="radio" name="compliment" value="fantastic" id="fantastic">
+          <label for="Fantastic">Fantastic</label>
+        </div>
           <input type="submit" value="Submit">
+
         </form>
       </body>
     </html>
@@ -48,7 +106,7 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    compliment = request.args.get("compliment")
 
     return f"""
     <!doctype html>
