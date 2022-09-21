@@ -34,22 +34,27 @@ def insult():
 
   return """<!doctype html> 
   <html>
+  <title> Insult </title>
+  <body>
   Wow you are really ugly! What is your name?
   <div>
   <form action="/insult">
   <input type="text" name="person">
-  <label Input Name>
+  </div?
+
   <div>
-  <label for="insult"> What insult would you like to choose? </label>
-    <select name="insult" id="selected_insult">
-    <option value="dumb"> Dumb </option>
-    <option value="out_of_shape"> Out of shape </option>
-    <option value="funny_looking"> Funny looking </option>
+      <input type="radio" name="insult" value="hideous" id="hideous">
+      <label for="hideous">hideous</label>
+      <input type="radio" name="insult" value="terrible" id="terrible>
+      <label for="terrible">terrible</label>
+      <input type="radio" name="insult" value="awful" id="awful">
+      <label for="awful">awful</label>
     </select>
   </div>
   <input type="Submit" value="Submit">
   </form>
   </div>
+  </body>
    </html>"""
 
 @app.route('/insult')
@@ -58,11 +63,11 @@ def create_insult():
     user = request.args.get("person")
     insult = request.args.get("insult")
 
-    return """<!doctype html>
+    return f"""<!doctype html>
   <html>
   <h1>An Insult:</h1>
   <body>
-  Wow {user} not only are you ugly, you are {insult}!
+    Wow {user} not only are you ugly, you are {insult}!
   </body>
   </html>
   """
@@ -87,7 +92,7 @@ def say_hello():
         </div>
           <input type="radio" name="compliment" value="amazing" id="amazing">
           <label for="amazing">Amazing</label>
-          <input type="radio" name="compliment" value="great" id="great>
+          <input type="radio" name="compliment" value="great" id="great">
           <label for="Great">Great</label>
           <input type="radio" name="compliment" value="fantastic" id="fantastic">
           <label for="Fantastic">Fantastic</label>
